@@ -30,13 +30,11 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
                     response_sent_text = get_message()
-                    #agregar mensaje_bot
-                    print(message['message'].get('text'))
-                    print(response_sent_text)
-                    MessageController.mensaje_user = 'hola'#message['message'].get('text')
-                    MessageController.mensaje_bot = 'hola'#response_sent_text
-                    MessageController.add_message(MessageController, app)
-                    #termina problema
+                    insertar(
+                        message['message'].get('text'),
+                        response_sent_text,
+                        recipient_id
+                    )
                     send_message(recipient_id, response_sent_text)
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
@@ -44,6 +42,12 @@ def receive_message():
 
     return "Message Processed"
 
+
+def insertar(mensaje_user, mensaje_bot, id_usuario):
+    MessageController.mensaje_user = mensaje_user
+    MessageController.mensaje_bot = mensaje_bot
+    MessageController.id_usuario = id_usuario
+    return MessageController.add_message(MessageController, app)
 
 def verify_fb_token(token_sent):
     if token_sent == VERIFY_TOKEN:

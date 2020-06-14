@@ -11,12 +11,12 @@ class mensajes(Model):
 
     __guarded__ = ['id_mensaje']
 
-    __fillable__ = ['mensaje_user', 'mensaje_bot', 'fecha']
+    __fillable__ = ['mensaje_user', 'mensaje_bot', 'id_usuario']
 
     __casts__ = {
         'mensaje_user': 'str',
         'mensaje_bot': 'str',
-        'fecha': 'str'
+        'id_usuario': 'str'
     }
 
 
